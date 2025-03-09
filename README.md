@@ -1,6 +1,5 @@
 # Vership
 
-## Overview
 
 **Vership** is a demo prototype that streamlines global trade compliance and optimizes cross-border shipping routes. The application features two primary modules:
 
