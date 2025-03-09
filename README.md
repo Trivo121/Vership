@@ -73,10 +73,3 @@
   - **Framework:** Express.js  
   - **Database:** SQLite  
 
-## Note
-
-Some of the files previously uploaded have expired. If you need those files to be reloaded, please upload them again.
-
----
-
-This README provides a concise overview of the project features, workflow, and tech stack for the Vership demo prototype.
