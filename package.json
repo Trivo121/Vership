@@ -1,0 +1,19 @@
+{
+  "name": "vership",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "scripts": {
+    "start": "node your-server-file.js",
+    "dev": "nodemon your-server-file.js",
+    "build": "your build command if necessary",
+    "test": "your test command if necessary"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.9"
+  },
+  "dependencies": {
+    "lucide-react": "^0.476.0"
+  }
+}
