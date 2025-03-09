@@ -1,4 +1,4 @@
-# Vership Demo: Global Trade Compliance & Cross-Border Route Selector
+# Vership
 
 ## Overview
 
