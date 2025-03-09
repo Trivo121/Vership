@@ -1,200 +1,83 @@
-#Vership 
+# Vership Demo: Global Trade Compliance & Cross-Border Route Selector
 
+## Overview
 
-Global Trade Compliance & Cross-Border Route Selector
-Overview
-Vership is a demo prototype designed to streamline global trade compliance and optimize cross-border shipping routes. The system comprises two main features:
+**Vership** is a demo prototype that streamlines global trade compliance and optimizes cross-border shipping routes. The application features two primary modules:
 
-Compliance Checker: Validates shipment details against country-specific regulations to ensure shipments comply with customs and trade rules.
-Cross-Border Route Selector: Calculates optimal shipping routes using multi-modal transport options (Air, Sea, Land, and combinations) and visualizes the routes on an interactive map.
-This prototype demonstrates how logistics providers can leverage modern technologies to reduce compliance errors, improve shipping efficiency, and generate detailed shipment reports.
+- **Compliance Checker:** Validates shipment details against country-specific regulations.
+- **Cross-Border Route Selector:** Calculates and displays optimal multi-modal shipping routes (Air, Sea, Land, and combinations) based on cost and transit time.
 
-Key Features
-User-Friendly Input Forms:
-Compliance Checker: A form for clerks to input shipment data (sender, recipient, item type, weight, etc.) with real-time validation feedback.
-Route Optimizer: A dedicated form that collects shipment details including origin, destination, weight, shipping priority (Economy, Standard, Express), and additional compliance-related inputs like Purpose of Shipment and Shipping Terms.
-Multi-Modal Route Calculation:
-Predefined routes for key scenarios (e.g., Mumbai to London, Mumbai to Singapore) using a simplified algorithm.
-Uses the Haversine formula for air distance calculations and mock distances for sea/land segments.
-Computes cost and transit time for each route segment using parameters stored in a SQLite database.
-Dynamic Route Suggestions:
-Displays route suggestions in a card-based layout sorted by estimated cost or transit time.
-An interactive map built with react-leaflet visualizes route segments with color-coded polylines.
-Compliance Validation & Reporting:
-Validates input against compliance rules stored in the SQLite database.
-Provides immediate feedback on errors (e.g., missing required fields, restricted items) and generates a PDF report if needed.
-Admin & Dashboard Modules (Optional):
-An admin panel allows dynamic rule updates.
-A dashboard displays real-time compliance trends and analytics.
-Project Structure
-less
-Copy code
-Vership/
-├── backend/
-│   ├── app.js               // Main Express application entry point
-│   ├── database.sql         // SQL file for database schema and initial data
-│   ├── database.sqlite      // SQLite database file
-│   ├── package.json         // Node.js dependencies and scripts
-│   ├── routes/
-│   │   ├── validation.js    // Routes for compliance checker validation endpoints
-│   │   ├── admin.js         // Routes for admin-related endpoints (rule updates)
-│   │   ├── report.js        // Routes for PDF report generation
-│   │   └── route.js         // Routes for the Cross-Border Router feature
-├── frontend/
-│   ├── public/
-│   │   └── index.html       // Main HTML file for the React app
-│   ├── src/
-│   │   ├── App.js           // Main React application component
-│   │   ├── index.js         // React entry point
-│   │   ├── components/
-│   │   │   ├── HomePage.js         // Home screen with feature cards
-│   │   │   ├── ClerkPage.js        // Compliance Checker Clerk view
-│   │   │   ├── Form.js             // Compliance form
-│   │   │   ├── Dashboard.js        // Manager dashboard
-│   │   │   ├── AdminPanel.js       // Admin panel for rule management
-│   │   │   └── RouteOptimizer/
-│   │   │       ├── RouteOptimizerPage.js  // Main page for the Route Optimizer feature
-│   │   │       ├── RouteInputForm.js        // Input form for shipment details & priority selection
-│   │   │       ├── RouteOutputDisplay.js    // Displays route suggestions
-│   │   │       └── RouteMap.js              // Map component (react-leaflet) for route visualization
-│   │   └── styles/
-│   │       └── index.css        // Tailwind CSS file for styling
-│   │   └── reportWebVitals.js
-Technology Stack
-Frontend: React.js, Tailwind CSS, React Router, react-leaflet (OpenStreetMap)
-Backend: Node.js, Express.js
-Database: SQLite
-Validation & Form Management: Zod, react-hook-form
-PDF Generation (Optional): PDFKit or Puppeteer
-Installation and Setup
-Prerequisites
-Node.js (v12+)
-npm (v6+)
-Backend Setup
-Clone the Repository:
-bash
-Copy code
-git clone https://your-repo-url.git
-cd Vership/backend
-Install Dependencies:
-bash
-Copy code
-npm install
-Set Up the Database:
-Initialize the SQLite database using the provided database.sql file:
-bash
-Copy code
-sqlite3 database.sqlite < database.sql
-Start the Backend Server:
-bash
-Copy code
-npm start
-The backend server will run on http://localhost:3000.
-Frontend Setup
-Navigate to the Frontend Directory:
-bash
-Copy code
-cd ../frontend
-Install Dependencies:
-bash
-Copy code
-npm install
-Start the React Development Server:
-bash
-Copy code
-npm start
-The frontend will be available on http://localhost:3001 (or the assigned port).
-Usage
-Homepage:
-Visit the homepage to access feature cards for "Compliance Checker" and "Cross-Border Router".
-Route Optimizer:
-Click the "Cross-Border Router" card to navigate to the route optimizer page.
-Fill in the shipment input form (origin, destination, package weight, shipping priority, etc.).
-On form submission, the frontend sends a POST request to /api/calculate-route and displays route suggestions along with an interactive map.
-Compliance Checker:
-Clerks can enter parcel data to validate against compliance rules.
-Real-time feedback is provided, and any errors (e.g., restricted items, missing required fields) are displayed immediately.
-Generate a PDF report to document compliance details.
-Backend Workflow
-API Endpoint:
-POST /api/calculate-route receives shipment data, validates inputs, retrieves location coordinates from the SQLite database, and calculates optimal routes using a simplified algorithm.
-Route Calculation:
-Distance Calculation: Uses the Haversine formula for air segments.
-Cost & Time Estimation: Retrieves parameters from the RouteCosts table to calculate segment costs and transit times.
-Route Ranking: Sorts routes (e.g., by cost) and returns structured JSON with route details and segment coordinates for map visualization.
-Compliance Validation (via /api/validate_parcel in validation.js):
-Validates required fields, checks restricted items and dangerous goods using data from the countries, restricted_items, and dangerous_goods tables.
-Returns a compliance status along with detailed error messages.
-Database Interaction:
-SQLite is used to store and retrieve data such as location details, cost parameters, and compliance rules.
-Additional Features & Future Enhancements
-Admin Panel:
-Update compliance rules dynamically through a secure admin interface.
-Dashboard:
-Visualize real-time compliance statistics and common validation errors using interactive charts.
-Enhanced Routing:
-Integrate live APIs (e.g., OpenStreetMap Nominatim) for dynamic location data and more complex routing algorithms.
-Detailed Compliance Reporting:
-Expand PDF report generation with detailed shipment and compliance information.
-Improved Data Validation:
-Extend form fields (e.g., shipping terms, purpose of shipment) and enforce more granular validation rules.
-Top-Down Approach Plan: Cross-Border Route Selector Demo Prototype
-I. Project Goal
-Develop a functional demo prototype of a "Cross-Border Route Selector" feature.
-Demonstrate multi-modal route optimization (Sea, Air, Land, Sea-Air combinations).
-Showcase optimal route suggestions based on cost and transit time.
-Integrate map visualization of routes.
-II. Key Feature Breakdown
-Shipment Input Form (Frontend):
-Collect shipment details like origin, destination, cargo, weight, and criteria.
+## Key Features
 
-Route Calculation (Backend):
-Generate and evaluate predefined routes for Mumbai-London and Mumbai-Singapore scenarios.
+- **User-Friendly Input Forms:**  
+  - **Shipment Input:** Collects essential shipment details (origin, destination, weight, shipping priority, etc.).  
+  - **Priority Selection:** Allows users to choose between Economy (Lowest Cost), Standard (Balanced), and Express (Fastest Time).
 
-Optimal Route Suggestions (Frontend & Backend):
-Rank and present top route options based on cost and transit time.
+- **Multi-Modal Route Calculation:**  
+  - Predefined routes for key scenarios (e.g., Mumbai–London, Mumbai–Singapore) using a simplified algorithm.
+  - Uses the Haversine formula for air segment distance calculations and mock distances for sea/land segments.
+  - Computes route costs and transit times using parameters from a SQLite database.
 
-Route Details Display (Frontend):
-Show mode sequence, estimated cost, and transit time for each route.
+- **Dynamic Route Suggestions & Map Visualization:**  
+  - Displays ranked route suggestions (based on cost or time) in a card-based layout.
+  - An interactive map (using `react-leaflet`) visualizes the route segments with color-coded polylines.
 
-Map Visualization (Frontend):
-Display routes on an interactive map using react-leaflet.
+- **Compliance Validation & Reporting:**  
+  - Real-time validation of shipment details against compliance rules stored in SQLite.
+  - Generates detailed error messages for restricted items and dangerous goods.
+  - Option to generate a PDF report of compliance results.
 
-III. Component-Based Breakdown
-Backend (Node.js & SQLite):
+## Workflow
 
-Database Setup:
-Define and populate tables for Locations, TransportModes, RouteCosts, and FeasibilityRules.
+### Frontend
 
-API Endpoint:
-Create /api/calculate-route to handle shipment data and perform route calculations.
+1. **Initial State:**  
+   - The Route Optimizer page loads with an empty route suggestions state.
+   - The map is initialized (centered over a relevant region) with no route polylines.
+   - The route table displays a prompt message (e.g., “Enter origin and destination to see route suggestions”).
 
-Route Calculation Logic:
-Implement functions to calculate distances, costs, transit times, and rank routes.
+2. **User Interaction:**  
+   - The user fills out the shipment input form with details like origin, destination, weight, and priority.
+   - On form submission, the frontend maps the input into location codes and sends a POST request to `/api/calculate-route`.
 
-Frontend (React & Tailwind CSS):
+3. **Dynamic Update:**  
+   - Once the backend responds with route data, the frontend updates:
+     - The **Route Map** renders the calculated route segments as polylines.
+     - The **Route Table** displays the ranked route suggestions (with cost, time, and mode details).
 
-Components:
-Create RouteInputForm, RouteOutputDisplay, and RouteMap components.
+### Backend
 
-Page Integration:
-Build a /route-optimizer page to host the input form, route suggestions, and map visualization.
+1. **API Request Handling:**  
+   - The `/api/calculate-route` endpoint receives shipment data and validates required fields.
+   - Location details (including coordinates) are retrieved from the SQLite `Locations` table.
 
-API Integration:
-Handle form submission, call the backend API, and update UI based on the response.
+2. **Route Calculation:**  
+   - Predefined routes (e.g., Air-Only, Sea-Air, Sea-Only) are evaluated:
+     - **Distance Calculation:** Uses the Haversine formula for air segments; mock values for sea/land segments.
+     - **Cost & Time Estimation:** Retrieves cost and time parameters from the `RouteCosts` table.
+     - **Route Ranking:** Routes are sorted (e.g., by cost) based on calculated totals.
+   - The backend sends a structured JSON response containing route suggestions and segment details.
 
-IV. Building Process
-Backend Setup:
-Initialize the Node.js/Express project, set up the SQLite database, and create the API endpoint.
+3. **Compliance Validation (for the Compliance Checker):**  
+   - Validates shipment data (including restricted items and dangerous goods) against rules stored in the SQLite database.
+   - Returns a compliance status with error messages if any issues are detected.
 
-Frontend Component Structure:
-Build React components for the input form, output display, and map.
+## Tech Stack
 
-Backend Route Calculation Logic:
-Implement functions to calculate distances, costs, and transit times.
+- **Frontend:**  
+  - **Framework:** React.js  
+  - **Styling:** Tailwind CSS  
+  - **Routing & Maps:** React Router, react-leaflet (OpenStreetMap)
 
-Frontend-Backend Integration:
-Connect the input form to the backend API and update the UI dynamically.
+- **Backend:**  
+  - **Runtime:** Node.js  
+  - **Framework:** Express.js  
+  - **Database:** SQLite  
 
-Testing and Refinement:
-Test all scenarios and refine both the UI and backend logic.
+## Note
+
+Some of the files previously uploaded have expired. If you need those files to be reloaded, please upload them again.
+
+---
+
+This README provides a concise overview of the project features, workflow, and tech stack for the Vership demo prototype.
