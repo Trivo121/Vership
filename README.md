@@ -31,13 +31,13 @@
 ### Frontend
 
 1. **Initial State:**  
-   - The Route Optimizer page loads with an empty route suggestions state.
-   - The map is initialized (centered over a relevant region) with no route polylines.
-   - The route table displays a prompt message (e.g., “Enter origin and destination to see route suggestions”).
+   - The Route Optimizer page loads with an empty route suggestions state. 
+   - The map is initialized (centered over a relevant region) with no route polylines. 
+   - The route table displays a prompt message (e.g., “Enter origin and destination to see route suggestions”). 
 
 2. **User Interaction:**  
    - The user fills out the shipment input form with details like origin, destination, weight, and priority.
-   - On form submission, the frontend maps the input into location codes and sends a POST request to `/api/calculate-route`.
+   - On form submission, the frontend maps the input into location codes and sends a POST request to `/api/calculate-route `.
 
 3. **Dynamic Update:**  
    - Once the backend responds with route data, the frontend updates:
@@ -48,7 +48,7 @@
 
 1. **API Request Handling:**  
    - The `/api/calculate-route` endpoint receives shipment data and validates required fields.
-   - Location details (including coordinates) are retrieved from the SQLite `Locations` table.
+   - Location details (including coordinates) are retrieved from the SQLite `Locations ` table.
 
 2. **Route Calculation:**  
    - Predefined routes (e.g., Air-Only, Sea-Air, Sea-Only) are evaluated:
