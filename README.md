@@ -48,7 +48,7 @@
 
 1. **API Request Handling:**  
    - The `/api/calculate-route` endpoint receives shipment data and validates required fields.
-   - Location details (including coordinates) are retrieved from the SQLite `Locations ` table.
+   - Location details (including coordinates) are retrieved from the SQLite `Locations` table.
 
 2. **Route Calculation:**  
    - Predefined routes (e.g., Air-Only, Sea-Air, Sea-Only) are evaluated:
